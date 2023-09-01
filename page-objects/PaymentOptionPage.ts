@@ -10,11 +10,12 @@ export class PaymentOptionPage extends BasePage {
 
   constructor(page: Page) {
     super(page)
-    this.coverTransactionCostsCheckBox = this.donationWidgetFrameLocator.locator('#popover-fees')
-    this.creditCardButton = this.donationWidgetFrameLocator.getByRole('button',{ name: 'Credit card' },)
-    this.googlePayButton = this.donationWidgetFrameLocator.getByLabel('Google Pay')
-    this.clickToPayButton = this.donationWidgetFrameLocator.getByRole('button',{ name: 'Bank transfer' },)
-    this.bankTransferButton = this.donationWidgetFrameLocator.getByRole('button', { name: 'Back' },)
+    const donationWidgetFrame = this.donationWidgetFrameLocator
+    this.coverTransactionCostsCheckBox = donationWidgetFrame.locator('#popover-fees')
+    this.creditCardButton = donationWidgetFrame.getByRole('button',{ name: 'Credit card' },)
+    this.googlePayButton = donationWidgetFrame.getByLabel('Google Pay')
+    this.clickToPayButton = donationWidgetFrame.getByRole('button',{ name: 'Bank transfer' },)
+    this.bankTransferButton = donationWidgetFrame.getByRole('button', { name: 'Back' },)
   }
 
   async setCoverTransactionCostsCheckBox(checked: boolean) {

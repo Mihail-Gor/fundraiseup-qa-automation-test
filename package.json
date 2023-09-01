@@ -4,13 +4,18 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test"
+    "test" : "playwright test",
+    "test:desktop" : "playwright test --config=playwright.config.ts --project=Chrome",
+    "test:mobile" : "playwright test --config=playwright.config.ts --project=Safari",
+    "report": "allure generate allure-results -o allure-report --clean && allure open allure-report"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.37.1",
+    "@playwright/test-runner": "^0.9.24",
+    "allure-playwright": "^2.6.0",
     "prettier": "3.0.3"
   }
 }

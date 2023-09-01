@@ -1,4 +1,4 @@
-import { expect, Locator, Page } from '@playwright/test'
+import { expect, FrameLocator, Locator, Page } from '@playwright/test'
 import { BasePage } from './BasePage'
 
 export class CreditCardPage extends BasePage {
@@ -12,7 +12,9 @@ export class CreditCardPage extends BasePage {
   constructor(page: Page) {
     super(page)
     const donationWidgetFrame = this.donationWidgetFrameLocator
-    const errorAlert = donationWidgetFrame.getByTestId('tooltip-desktop-error-alert')
+    const desktopErrorAlertLocator = donationWidgetFrame.locator('data-testid=tooltip-desktop-error-alert')
+    const mobileErrorAlertLocator = donationWidgetFrame.locator('data-testid=tooltip-mobile-error-alert')
+    const errorAlert = desktopErrorAlertLocator.or(mobileErrorAlertLocator)
     this.cardNumberInput = donationWidgetFrame.frameLocator('iframe[title="Secure card number input frame"]').locator('input[name="cardnumber"]')
     this.expDateInput = donationWidgetFrame.frameLocator('iframe[title="Secure expiration date input frame"]').locator('input[name="exp-date"]')
     this.cvcInput = donationWidgetFrame.frameLocator('iframe[title="Secure CVC input frame"]').locator('input[name="cvc"]')

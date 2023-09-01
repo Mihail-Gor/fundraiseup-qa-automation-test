@@ -11,27 +11,17 @@ export class SecureDonationPage extends BasePage {
 
   constructor(page: Page) {
     super(page)
-
-    this.giveOnceButton = this.donationWidgetFrameLocator.getByRole('button', { name: 'Give once' })
-    this.monthlyButton = this.donationWidgetFrameLocator.getByRole('button', { name: 'Monthly' })
-    this.priceInput = this.donationWidgetFrameLocator.getByTestId('price-input')
-    this.donationCurrencyDropDown = this.donationWidgetFrameLocator.getByLabel('Donation currency')
-    this.donateButton = this.donationWidgetFrameLocator.getByRole('button', { name: 'Donate' })
-    this.donateMonthlyButton = this.donationWidgetFrameLocator.getByRole('button', { name: 'Donate monthly' })
-  }
-
-  async clickOnFrequencyButton(frequency: 'giveOnce' | 'monthly') {
-    const targetButton = this[frequency + 'Button']
-    await targetButton.click()
+    const donationWidgetFrame = this.donationWidgetFrameLocator
+    this.giveOnceButton = donationWidgetFrame.getByRole('button', { name: 'Give once' })
+    this.monthlyButton = donationWidgetFrame.getByRole('button', { name: 'Monthly' })
+    this.priceInput = donationWidgetFrame.getByTestId('price-input')
+    this.donationCurrencyDropDown = donationWidgetFrame.getByLabel('Donation currency')
+    this.donateButton = donationWidgetFrame.getByRole('button', { name: 'Donate' })
+    this.donateMonthlyButton = donationWidgetFrame.getByRole('button', { name: 'Donate monthly' })
   }
 
   async selectDonationCurrency(currency: string, value: string) {
     await this.donationCurrencyDropDown.selectOption(currency)
     await this.priceInput.fill(value)
-  }
-
-  async clickOnDonateButton(button: 'donate' | 'donateMonthly') {
-    const targetButton = this[button + 'Button']
-    await targetButton.click()
   }
 }

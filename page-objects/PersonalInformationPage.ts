@@ -9,15 +9,16 @@ export class PersonalInformationPage extends BasePage {
 
   constructor(page: Page) {
     super(page)
-    this.firstNameInput = this.donationWidgetFrameLocator.locator('input[name="firstName"]')
-    this.lastNameInput = this.donationWidgetFrameLocator.locator('input[name="lastName"]')
-    this.emailAddressInput = this.donationWidgetFrameLocator.locator('input[name="email"]')
-    this.payButton = this.donationWidgetFrameLocator.getByTestId('pay-button')
+    const donationWidgetFrame = this.donationWidgetFrameLocator
+    this.firstNameInput = donationWidgetFrame.locator('input[name="firstName"]')
+    this.lastNameInput = donationWidgetFrame.locator('input[name="lastName"]')
+    this.emailAddressInput = donationWidgetFrame.locator('input[name="email"]')
+    this.payButton = donationWidgetFrame.getByTestId('pay-button')
   }
 
-  async fillPersonalInformationForm(firstName:string, lastName:string, emailAddress:string) {
-    await this.firstNameInput.fill(firstName)
-    await this.lastNameInput.fill(lastName)
-    await this.emailAddressInput.fill(emailAddress)
+  async fillPersonalInformationForm(firstName: string, lastName: string, emailAddress: string) {
+    await this.firstNameInput.type(firstName)
+    await this.lastNameInput.type(lastName)
+    await this.emailAddressInput.type(emailAddress)
   }
 }
